@@ -19,17 +19,15 @@ import { apikeys as credentials } from './apikeys.js';
 function getPlayerStats(e) {
   let username = document.getElementById('username').value;
   let platform = document.getElementById('platforms').value;
+  const URL = 'https://call-of-duty-modern-warfare.p.rapidapi.com';
   // fetching player stats
-  fetch(
-    `https://call-of-duty-modern-warfare.p.rapidapi.com/warzone/${username}/${platform}`,
-    {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-key': credentials.key,
-        'x-rapidapi-host': credentials.host
-      }
+  fetch(`${URL}/warzone/${username}/${platform}`, {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': credentials.key,
+      'x-rapidapi-host': credentials.host
     }
-  )
+  })
     .then((response) => {
       // console.log(response.json());
       return response.json();
@@ -45,7 +43,7 @@ function getPlayerStats(e) {
   // // fetching match stats
   // // too many requests at once (even though it's just 2)
   // fetch(
-  // `https://call-of-duty-modern-warfare.p.rapidapi.com/warzone-matches/${username}/${platform}`,
+  // `${URL}/warzone-matches/${username}/${platform}`,
   //   {
   //     method: 'GET',
   //     headers: {
