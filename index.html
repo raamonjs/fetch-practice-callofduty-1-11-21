@@ -3,10 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Cod Stats</title>
   </head>
   <body>
+    <div class="container">
+      <form>
+        <label>Username</label>
+        <input class="form-control" type="text" id="username" />
+        <label for="platforms">Select Platform:</label>
+        <select class="form-control" id="platforms" name="platforms">
+          <option value="psn">Playstation</option>
+          <option value="xbl">Xbox</option>
+        </select>
+        <br />
+        <button class="btn btn-success btn-lg btn-block" id="submit">
+          Submit
+        </button>
+      </form>
+
+      <br />
+
+      <table id="table" hidden class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Wins</th>
+            <th scope="col">KD</th>
+            <th scope="col">Total Kills</th>
+            <th scope="col">Total Downs</th>
+          </tr>
+        </thead>
+        <tbody id="stats"></tbody>
+      </table>
+    </div>
     <script type="module" src="script.js"></script>
   </body>
 </html>

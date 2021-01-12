@@ -22,9 +22,11 @@
 import { apikeys as credentials } from './apikeys.js';
 
 // Using fetch api to make requests to call of duty api
-function getStats() {
+function getStats(e) {
+  let username = document.getElementById('username').value;
+  let platform = document.getElementById('platforms').value;
   fetch(
-    'https://call-of-duty-modern-warfare.p.rapidapi.com/warzone/Chob%252321309/battle',
+    `https://call-of-duty-modern-warfare.p.rapidapi.com/warzone/${username}/${platform}`,
     {
       method: 'GET',
       headers: {
@@ -38,11 +40,34 @@ function getStats() {
       return response.json();
     })
     .then((obj) => {
-      console.log(obj.br);
+      // calling updateui
+      updateUI(obj.br_all, username);
     })
     .catch((err) => {
       console.error(err);
     });
+  e.preventDefault();
 }
 
-getStats();
+// update ui with table of stats. will eventually add button to remove stats and hide table again.
+function updateUI(obj, username) {
+  console.log(obj);
+
+  let content = `
+  <tr>
+    <th scope="row">${username}</th>
+    <td>${obj.wins}</td>
+    <td>${obj.kdRatio.toFixed(2)}</td>
+    <td>${obj.kills}</td>
+    <td>${obj.downs}</td>
+  </tr>`;
+  document.getElementById('table').removeAttribute('hidden');
+  document.getElementById('stats').innerHTML = content;
+}
+
+// adding a event listener when submiting form
+
+document.getElementById('submit').addEventListener('click', getStats);
+
+// How i'd get value of platform
+// console.log(document.getElementById('platforms').value);
